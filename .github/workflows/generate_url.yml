@@ -21,7 +21,7 @@ jobs:
         # 生成された URL をファイルに書き込む
         echo "$generated_url" > generated_url.txt
       # 生成された URL をアーティファクトとして保存する
-      working-directory: /
+      working-directory: .
     - name: Upload URL artifact
       uses: actions/upload-artifact@v2
       with:
