@@ -10,7 +10,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         submodules: recursive  # サブモジュールを含めてリポジトリをチェックアウトする
  
@@ -23,7 +23,7 @@ jobs:
       # 生成された URL をアーティファクトとして保存する
       working-directory: .
     - name: Upload URL artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: generated-url
         path: generated_url.txt
