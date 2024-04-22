@@ -1,0 +1,43 @@
+name: dairy_submodule_update_check
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+  workflow_dispatch:
+ 
+permissions:
+  pages: write
+  id-token: write
+  contents: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}  # リポジトリを現在のリポジトリに設定
+          submodules: 'recursive'  # サブモジュールを再帰的にチェックアウト
+      - name: Update submodules
+        run: git submodule update --remote --recursive 
+
+      - name: Check git dif & set status
+        id: status
+        run: echo "status=$(git status -s)" >> $GITHUB_OUTPUT
+      - name: Add and commit and push files
+        uses: snow-actions/git-config-user@v1.0.0
+        with:
+          name:  ${{secrets.USER_NAME}}
+          email: ${{secrets.USER_EMAIL}}
+        if: ${{ needs.update-submodule.outputs.status }}
+      - run: |
+          set -x
+          git add .
+          git commit -m 'Update submodle' 
+          git push 
+        if: ${{ needs.update-submodule.outputs.status }}
