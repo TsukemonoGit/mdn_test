@@ -23,7 +23,6 @@ jobs:
         echo "$generated_url" > generated_url.txt
         echo "title=$(echo $generated_url | jq -r '.title')" >> $GITHUB_OUTPUT
         echo "url=$(echo $generated_url | jq -r '.url')" >> $GITHUB_OUTPUT
-      # 生成された URL をアーティファクトとして保存する
       working-directory: .
 
 # nostrに投稿する
