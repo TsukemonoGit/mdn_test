@@ -20,6 +20,8 @@ jobs:
         generated_url=$(python find_and_generate_url.py)
         # 生成された URL をファイルに書き込む
         echo "$generated_url" > generated_url.txt
+        echo "title=$(echo $generated_url | jq -r '.title')" >> $GITHUB_OUTPUT
+        echo "title=$(echo $generated_url | jq -r '.url')" >> $GITHUB_OUTPUT
       # 生成された URL をアーティファクトとして保存する
       working-directory: .
     - name: Upload URL artifact
@@ -27,3 +29,16 @@ jobs:
       with:
         name: generated-url
         path: generated_url.txt
+# nostrに投稿する
+    - uses: snow-actions/nostr@v1.7.0
+      with:
+        relays: ${{ vars.NOSTR_RELAYS }}
+        private-key: ${{ secrets.NOSTR_PRIVATE_KEY }}
+        content: |
+          ${{ steps.generate-url.outputs.title }}
+          ${{ steps.generate-url.outputs.url }}
+      id: publish
+    - run: echo "${event}"
+      env:
+        event: ${{ steps.publish.outputs.event }}
+
