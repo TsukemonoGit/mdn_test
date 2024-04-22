@@ -2,6 +2,7 @@ import os
 import random
 import json
 import requests
+import re
 
 # スクリプトが存在するディレクトリのパス
 script_dir = os.path.dirname(os.path.abspath(__file__))
