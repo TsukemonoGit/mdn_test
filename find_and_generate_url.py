@@ -3,8 +3,10 @@ import random
 import json
 import requests
 
- # 検索対象のフォルダへのパス
-search_dir = "./content/files/en-us"  
+# スクリプトが存在するディレクトリのパス
+script_dir = os.path.dirname(os.path.abspath(__file__))
+# 検索対象のフォルダへのパス
+search_dir = os.path.join(script_dir, "content/files/en-us")
 
 # index.mdファイルを再帰的に探索する関数
 def search_index_md_files(directory):
