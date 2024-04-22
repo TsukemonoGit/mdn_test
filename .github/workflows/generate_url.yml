@@ -15,13 +15,14 @@ jobs:
         submodules: recursive  # サブモジュールを含めてリポジトリをチェックアウトする
  
     - name: Generate URL and save as artifact
+      id:  generate
       run: |
         # URL を生成する処理を実行するスクリプトを呼び出す
         generated_url=$(python find_and_generate_url.py)
         # 生成された URL をファイルに書き込む
         echo "$generated_url" > generated_url.txt
         echo "title=$(echo $generated_url | jq -r '.title')" >> $GITHUB_OUTPUT
-        echo "title=$(echo $generated_url | jq -r '.url')" >> $GITHUB_OUTPUT
+        echo "url=$(echo $generated_url | jq -r '.url')" >> $GITHUB_OUTPUT
       # 生成された URL をアーティファクトとして保存する
       working-directory: .
     - name: Upload URL artifact
@@ -35,8 +36,8 @@ jobs:
         relays: ${{ vars.NOSTR_RELAYS }}
         private-key: ${{ secrets.NOSTR_PRIVATE_KEY }}
         content: |
-          ${{ steps.generate-url.outputs.title }}
-          ${{ steps.generate-url.outputs.url }}
+          ${{ steps.generate.outputs.title }}
+          ${{ steps.generate.outputs.url }}
       id: publish
     - run: echo "${event}"
       env:
