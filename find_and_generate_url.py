@@ -19,7 +19,7 @@ def search_index_md_files(directory):
 
 
 # ランダムに1つのindex.mdファイルを選択してURLを作成する関数
-def generate_random_url(index_md_files):
+def get_random_url_and_title(index_md_files):
 
     
     # index_filesからランダムに1つのindex.mdファイルを選択
