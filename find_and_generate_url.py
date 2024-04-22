@@ -37,7 +37,7 @@ def generate_random_url(index_md_files):
         # URLをチェックして存在する方を返す
         if url_exists(url_ja):
             return {"title": title, "url":url_ja}
-        elif :
+        else :
             return {"title": title, "url":url_en}
 
     else:
