@@ -25,8 +25,8 @@ def generate_random_url(index_md_files):
     # index_filesからランダムに1つのindex.mdファイルを選択
     random_index_md_file = random.choice(index_md_files)
     
-    # 選択したindex.mdファイルからslug情報を取得
-    slug = get_slug_from_index_md(random_index_md_file)
+ # 選択したindex.mdファイルからslug情報とtitle情報を取得
+    slug, title = get_info_from_index_md(random_index_md_file)
     
     if slug:
         # URLを作成
@@ -36,12 +36,10 @@ def generate_random_url(index_md_files):
         
         # URLをチェックして存在する方を返す
         if url_exists(url_ja):
-            return url_ja
-        elif url_exists(url_en):
-            return url_en
-        else:
-            print("Both URLs are not available.")
-            return None
+            return {"title": title, "url":url_ja}
+        elif :
+            return {"title": title, "url":url_en}
+
     else:
         print("Slug information not found in the selected index.md file.")
         return None
