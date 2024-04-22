@@ -2,8 +2,8 @@ name: Generate URL
 
 on:
   workflow_dispatch:
-  # schedule:
-  # - cron: "0 2 * * 1-5"
+  schedule:
+  - cron: "0 */2 * * *" # 2hに一回？ 
 jobs:
   generate-url:
     runs-on: ubuntu-latest
@@ -14,7 +14,7 @@ jobs:
       with:
         submodules: recursive  # サブモジュールを含めてリポジトリをチェックアウトする
  
-    - name: Generate URL and save as artifact
+    - name: Generate URL
       id:  generate
       run: |
         # URL を生成する処理を実行するスクリプトを呼び出す
@@ -25,11 +25,7 @@ jobs:
         echo "url=$(echo $generated_url | jq -r '.url')" >> $GITHUB_OUTPUT
       # 生成された URL をアーティファクトとして保存する
       working-directory: .
-    - name: Upload URL artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: generated-url
-        path: generated_url.txt
+
 # nostrに投稿する
     - uses: snow-actions/nostr@v1.7.0
       with:
