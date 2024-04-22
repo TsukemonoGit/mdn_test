@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive  # サブモジュールを含めてリポジトリをチェックアウトする
+ 
     - name: Generate URL and save as artifact
       run: |
         # URL を生成する処理を実行するスクリプトを呼び出す
