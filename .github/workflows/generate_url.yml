@@ -1,0 +1,23 @@
+name: Generate URL
+
+on:
+  workflow_dispatch:
+  # schedule:
+  # - cron: "0 2 * * 1-5"
+jobs:
+  generate-url:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Generate URL and save as artifact
+      run: |
+        # URL を生成する処理を実行するスクリプトを呼び出す
+        generated_url=$(python find_and_generate_url.py)
+        # 生成された URL をファイルに書き込む
+        echo "$generated_url" > generated_url.txt
+      # 生成された URL をアーティファクトとして保存する
+    - name: Upload URL artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: generated-url
+        path: generated_url.txt
