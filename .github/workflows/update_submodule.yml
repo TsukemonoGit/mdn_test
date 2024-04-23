@@ -34,10 +34,10 @@ jobs:
         with:
           name:  ${{secrets.USER_NAME}}
           email: ${{secrets.USER_EMAIL}}
-        if: ${{ status.update-submodule.outputs.status }}
+        if: ${{ steps.status.outputs.status }}
       - run: |
           set -x
           git add .
           git commit -m 'Update submodle' 
           git push 
-        if: ${{ status.update-submodule.outputs.status }}
+        if: ${{ steps.status.outputs.status }}
