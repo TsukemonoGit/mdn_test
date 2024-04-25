@@ -12,6 +12,7 @@ https://github.com/mdn/content をサブモジュールにして、
   その中からランダムに一つ選んで、
   index.mdの中身からサイトのタイトルとURLを出して、
   ポスト
+  最初からいっこだけランダムなフォルダに探しに行ったほうがよいかも？
 
 - update_submodule.yml
   
