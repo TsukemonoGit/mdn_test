@@ -27,6 +27,7 @@ jobs:
 
 # nostrに投稿する
     - uses: snow-actions/nostr@v1.7.0
+      timeout-minutes: 0.5
       with:
         relays: ${{ vars.NOSTR_RELAYS }}
         private-key: ${{ secrets.NOSTR_PRIVATE_KEY }}
@@ -34,7 +35,7 @@ jobs:
           ${{ steps.generate.outputs.title }}
           ${{ steps.generate.outputs.url }}
       id: publish
-    - run: echo "${event}"
-      env:
-        event: ${{ steps.publish.outputs.event }}
+   # - run: echo "${event}"
+   #   env:
+   #     event: ${{ steps.publish.outputs.event }}
 
