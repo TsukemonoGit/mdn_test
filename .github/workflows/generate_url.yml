@@ -27,7 +27,7 @@ jobs:
 
 # nostrに投稿する
     - uses: snow-actions/nostr@v1.7.0
-      timeout-minutes: 0.5
+      timeout-minutes: 0.2
       with:
         relays: ${{ vars.NOSTR_RELAYS }}
         private-key: ${{ secrets.NOSTR_PRIVATE_KEY }}
