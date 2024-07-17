@@ -7,7 +7,7 @@ on:
 jobs:
   generate-url:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 2 #全体のtimeout
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
 
 # nostrに投稿する
     - uses: snow-actions/nostr@v1.7.0
-      timeout-minutes: 0.2
+      timeout-minutes: 0.2 #publishのTimeout
       with:
         relays: ${{ vars.NOSTR_RELAYS }}
         private-key: ${{ secrets.NOSTR_PRIVATE_KEY }}
