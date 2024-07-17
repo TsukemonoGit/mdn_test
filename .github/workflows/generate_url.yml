@@ -7,7 +7,7 @@ on:
 jobs:
   generate-url:
     runs-on: ubuntu-latest
-    timeout-minutes: 2 #全体のtimeout
+    timeout-minutes: 1 #全体のtimeout
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
